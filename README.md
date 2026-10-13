@@ -2,9 +2,9 @@
 
 Aplicación de estudio en español con React, Vite, TypeScript, Tailwind CSS y Supabase. El proyecto está implementado: no es necesario volver a ejecutar `create-vite` sobre esta carpeta.
 
-## 1. Base de datos: empieza aquí
+## 1. Base de datos
 
-Abre **SQL Editor → New query** en tu proyecto de Supabase, copia el contenido completo de [`supabase/schema.sql`](supabase/schema.sql) y pulsa **Run**. Ejecútalo **una vez en un proyecto nuevo**; no reemplaza tablas preexistentes.
+El esquema de [`supabase/schema.sql`](supabase/schema.sql) ya se aplicó al proyecto Supabase compartido con bemyrecruiter (`lfxwajgpkwuqnkgibhkk`). Las tres tablas se añadieron sin sustituir las existentes. Para instalarlo en **otro** proyecto, abre **SQL Editor → New query**, copia el archivo completo y pulsa **Run** una sola vez.
 
 El script crea:
 
@@ -58,9 +58,9 @@ Usa la clave **publishable**. No introduzcas `service_role` ni claves `sb_secret
 En **Authentication** de Supabase:
 
 1. Activa el proveedor **Email** con contraseña. Mantén la confirmación de correo si la necesitas.
-2. En **URL Configuration**, configura **Site URL** como `http://127.0.0.1:5173` durante desarrollo.
-3. Añade `http://127.0.0.1:5173` a **Redirect URLs**. Si usas `localhost`, añade también `http://localhost:5173`.
-4. Para producción, cambia Site URL a tu dominio HTTPS y añade ese origen a Redirect URLs. Usa los dominios concretos de tus previews si vas a probar el registro en ellos.
+2. En **URL Configuration** del proyecto compartido, conserva el **Site URL** que necesite bemyrecruiter. Añade `https://estudia-five.vercel.app/**` a **Redirect URLs** para que la confirmación de correo de esta app vuelva al sitio publicado. Este ajuste aún debe verificarse en el panel de Supabase.
+3. Para desarrollo local, añade `http://127.0.0.1:5173/**` a **Redirect URLs**. Si usas `localhost`, añade también `http://localhost:5173/**`.
+4. Añade las URL concretas de las previews que vayas a probar. No cambies el Site URL global de una base compartida solo para esta aplicación.
 
 Arranca:
 
@@ -138,13 +138,9 @@ Para validar la integración remota después de configurar las variables:
 
 ## 6. Despliegue en Vercel
 
-La configuración está en [`vercel.json`](vercel.json). No hay servidor Node ni funciones necesarias en producción: Vercel sirve `dist` y el navegador se conecta directamente a Supabase con RLS.
+La producción está en **https://estudia-five.vercel.app**, dentro del proyecto Vercel **estudia**, conectado al repositorio **https://github.com/LauraTabaresPena/estudIA** y al proyecto Supabase `lfxwajgpkwuqnkgibhkk`. El despliegue inicial terminó en estado `READY` y la página respondió HTTP 200. La configuración está en [`vercel.json`](vercel.json). No hay servidor Node ni funciones necesarias en producción: Vercel sirve `dist` y el navegador se conecta directamente a Supabase con RLS.
 
-1. Sube esta carpeta a un repositorio Git e impórtalo en Vercel.
-2. Selecciona el directorio raíz de esta aplicación y el preset **Vite**.
-3. Usa `pnpm install --frozen-lockfile` como comando de instalación, `pnpm build` como build y `dist` como salida.
-4. Añade `VITE_SUPABASE_URL` y `VITE_SUPABASE_PUBLISHABLE_KEY` a los entornos que vayas a desplegar. Son variables de compilación; cambiarlas requiere un nuevo despliegue.
-5. Configura el dominio final en Supabase Auth como se describe arriba y despliega.
+El proyecto ya tiene preset **Vite**, `pnpm install --frozen-lockfile` como instalación, `pnpm build` como build, `dist` como salida y ambas variables `VITE_SUPABASE_*` en producción, previews y desarrollo. Son variables de compilación; cambiarlas requiere un nuevo despliegue. Los cambios futuros enviados a `main` se pueden desplegar desde la integración GitHub de Vercel.
 
 `packageManager` fija pnpm 11.25.0. La configuración `nodeLinker: hoisted` permite instalar también en unidades exFAT de Windows sin enlaces simbólicos.
 

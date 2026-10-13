@@ -16,9 +16,12 @@ Historia comprobada: el usuario configura un ciclo, estudia, registra su finaliz
 | Diseño adaptable | Cuadrícula de tres columnas a 1440 px; una columna a 390 px; sin desbordamiento horizontal detectado |
 | Preferencias | Cambio a Noche y restauración a Jardín comprobados |
 | Cuenta sin configurar | Modal explica modo local y conexión pendiente |
+| Supabase remoto | Esquema aplicado al proyecto `lfxwajgpkwuqnkgibhkk`; tablas presentes con RLS activo |
+| GitHub | Código publicado en `LauraTabaresPena/estudIA`, rama `main` |
+| Vercel | Proyecto `estudia`, despliegue de producción `READY`; `https://estudia-five.vercel.app` responde HTTP 200 y sirve la app |
 
 Los errores transitorios de Fast Refresh al añadir un hook durante desarrollo no pertenecen a la compilación de producción; se resolvieron al recargar.
 
 La compilación sin variables Supabase genera aproximadamente 118 KB gzip de JS y CSS en total, incluido el editor y el modal de acceso. El SDK autenticado se incluye al compilar con Supabase configurado, por lo que ese peso será mayor. No se incluyen fuentes remotas ni un iframe inicial de YouTube.
 
-Pendiente de configuración externa: aplicar el SQL al proyecto elegido, añadir su URL y clave publishable, y ejecutar el recorrido de registro/acceso/sincronización descrito en README. No se ha creado ni modificado un proyecto remoto de Supabase ni publicado un despliegue de Vercel.
+Pendiente de verificación manual: añadir o comprobar `https://estudia-five.vercel.app/**` en **Supabase Auth → URL Configuration → Redirect URLs** del proyecto compartido y ejecutar el recorrido de registro/acceso/sincronización descrito en README con una cuenta de prueba. No se cambió el Site URL global para evitar afectar bemyrecruiter. La base y el despliegue sí están configurados; el recorrido autenticado real todavía no se ha probado.
